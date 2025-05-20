@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>抽奖倒计时</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background: #f5f5f5;
+        }
+        #container {
+            text-align: center;
+        }
+        #result {
+            font-size: 2em;
+            margin-top: 20px;
+            color: #333;
+        }
+        #countdown {
+            font-size: 2em;
+            color: #0078d7;
+            margin-top: 20px;
+        }
+        button {
+            font-size: 1.5em;
+            padding: 15px 40px;
+            cursor: pointer;
+            background: #0078d7;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        button:active {
+            background: #005fa3;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <button id="drawBtn">抽奖</button>
+        <div id="countdown"></div>
+        <div id="result"></div>
+    </div>
+    <script>
+        const btn = document.getElementById('drawBtn');
+        const countdownDiv = document.getElementById('countdown');
+        const resultDiv = document.getElementById('result');
+
+        btn.onclick = function() {
+            btn.disabled = true;
+            resultDiv.textContent = '';
+            let count = 3;
+            countdownDiv.textContent = count;
+            const timer = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    countdownDiv.textContent = count;
+                } else {
+                    clearInterval(timer);
+                    countdownDiv.textContent = '';
+                    resultDiv.textContent = '傻逼';
+                    btn.disabled = false;
+                }
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
